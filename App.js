@@ -9,10 +9,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="home"
+        initialRouteName="keep-it-moving"
         screenOptions={{ headerShown: false }} // Remove headers for all screens
       >
-        <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="keep-it-moving" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );

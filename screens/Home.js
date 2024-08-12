@@ -13,14 +13,12 @@ const Home = () => {
   const [error, setError] = useState(null);
 
   const date = new Date();
-
   const options = {
-    weekday: 'long', // "Monday"
-    year: 'numeric', // "2024"
-    month: 'long', // "August"
-    day: 'numeric' // "12"
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   };
-
   const formattedDate = date.toLocaleDateString('en-US', options);
 
   useEffect(() => {
@@ -46,7 +44,14 @@ const Home = () => {
         return;
       }
 
-      let { coords } = await Location.getCurrentPositionAsync({});
+      let locationOptions = {
+        accuracy: Location.Accuracy.Highest,
+        timeInterval: 5000,
+        distanceInterval: 1,
+      };
+
+      let { coords } = await Location.getCurrentPositionAsync(locationOptions);
+      console.log('User location:', coords);
       fetchWeather(coords.latitude, coords.longitude);
     };
 
