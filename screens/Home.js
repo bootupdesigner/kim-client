@@ -1,6 +1,6 @@
 // Home.js
 import React, { useState, useEffect } from 'react';
-import { View, ActivityIndicator, StyleSheet, Text, ScrollView, Platform, StatusBar } from 'react-native';
+import { View, ActivityIndicator, StyleSheet, Text, ScrollView, Platform, StatusBar, SafeAreaView } from 'react-native';
 import axios from 'axios';
 import * as Location from 'expo-location';
 import WeatherInfo from '../components/WeatherInfo';
@@ -66,33 +66,34 @@ const Home = () => {
   }
 
   return (
-    <View style={{ paddingTop: 35 }} >
-      <View style={{backgroundColor:'#000',}}>
-        <Text style={{ fontSize: 34,color:'#fff', fontWeight: 'bold', textAlign: 'center', }}>Keep It Moving</Text>
-        <Text style={{ fontSize: 24, fontWeight: 'bold',color:'#fff', textAlign: 'center', }}>{formattedDate}</Text>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <View style={{ backgroundColor: '#000', marginBottom: 15 }}>
+          <Text style={{ fontSize: 34, color: '#fff', fontWeight: 'bold', textAlign: 'center', }}>Keep It Moving</Text>
+          <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#fff', textAlign: 'center', }}>{formattedDate}</Text>
+        </View>
+        <ScrollView style={{paddingHorizontal:16}}>
+          <WeatherInfo
+            location={weatherData.location}
+            currentTempFahrenheit={weatherData.currentTempFahrenheit}
+            minTempFahrenheit={weatherData.minTempFahrenheit}
+            maxTempFahrenheit={weatherData.maxTempFahrenheit}
+            chanceOfRain={weatherData.chanceOfRain}
+            weatherDescription={weatherData.weatherDescription}
+            weatherIcon={weatherData.weatherIcon}
+          />
+
+          <NewsComponent />
+
+          <RecipeSearch />
+        </ScrollView>
       </View>
-      <ScrollView style={styles.container}>
-        <WeatherInfo
-          location={weatherData.location}
-          currentTempFahrenheit={weatherData.currentTempFahrenheit}
-          minTempFahrenheit={weatherData.minTempFahrenheit}
-          maxTempFahrenheit={weatherData.maxTempFahrenheit}
-          chanceOfRain={weatherData.chanceOfRain}
-          weatherDescription={weatherData.weatherDescription}
-          weatherIcon={weatherData.weatherIcon}
-        />
-
-        <NewsComponent />
-
-        <RecipeSearch />
-      </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
     paddingTop: Platform.OS === "android" ?
       StatusBar.currentHeight : 0,
   },

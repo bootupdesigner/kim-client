@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     shadowRadius: Platform.OS === 'web' || Platform.OS === 'ios' ? 3 : null,
     elevation: 3,
     backgroundColor: '#fff',
+    marginVertical:5,
   },
   searchContainer: {
     position: 'relative',
