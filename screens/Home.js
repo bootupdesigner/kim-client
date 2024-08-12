@@ -8,6 +8,7 @@ import NewsComponent from '../components/NewsComponent';
 import RecipeSearch from '../components/RecipeSearch';
 
 const Home = () => {
+  
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -51,7 +52,7 @@ const Home = () => {
       };
 
       let { coords } = await Location.getCurrentPositionAsync(locationOptions);
-      console.log('User location:', coords);
+      
       fetchWeather(coords.latitude, coords.longitude);
     };
 
